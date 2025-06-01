@@ -1,8 +1,8 @@
 package com.deloitte.bootcamp.api_backend.model.mapper;
 
 import com.deloitte.bootcamp.api_backend.model.dto.UsuarioDTO;
-import com.deloitte.bootcamp.api_backend.model.entity.TipoUsuario;
-import com.deloitte.bootcamp.api_backend.model.entity.Usuario;
+import com.deloitte.bootcamp.api_backend.model.entity.RoleName;
+import com.deloitte.bootcamp.api_backend.model.entity.User;
 
 
 /**
@@ -34,14 +34,14 @@ public class UsuarioMapper {
      * @param usuario Entidade Usuario vinda do banco de dados.
      * @return UsuarioDTO com os dados convertidos.
      */
-    public static UsuarioDTO toDTO(Usuario usuario) {
+    public static UsuarioDTO toDTO(User usuario) {
         if (usuario == null) return null;
         UsuarioDTO dto = new UsuarioDTO();
         dto.setId(usuario.getId());
         dto.setNome(usuario.getNome());
         dto.setEmail(usuario.getEmail());
-        dto.setSenha(usuario.getSenha());
-        dto.setTipoUsuario(String.valueOf(usuario.getTipoUsuario()))    ; // Converte enum para String
+        dto.setSenha(usuario.getPassword());
+        dto.setTipoUsuario(String.valueOf(usuario.getRoleName()))    ; // Converte enum para String
         return dto;
     }
 
@@ -54,14 +54,14 @@ public class UsuarioMapper {
      * @param dto DTO recebido da API.
      * @return Entidade Usuario pronta para ser salva no banco.
      */
-    public static Usuario toEntity(UsuarioDTO dto) {
+    public static User toEntity(UsuarioDTO dto) {
         if (dto == null) return null;
-        Usuario usuario = new Usuario();
+        User usuario = new User();
         usuario.setId(dto.getId());
         usuario.setNome(dto.getNome());
         usuario.setEmail(dto.getEmail());
-        usuario.setSenha(dto.getSenha());
-        usuario.setTipoUsuario(TipoUsuario.valueOf(dto.getTipoUsuario())); // Converte String para enum
+        usuario.setPassword(dto.getSenha());
+        usuario.setRoleName(RoleName.valueOf(dto.getTipoUsuario())); // Converte String para enum
         return usuario;
     }
 }
