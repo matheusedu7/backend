@@ -3,10 +3,10 @@ package com.deloitte.bootcamp.api_backend.service;
 import com.deloitte.bootcamp.api_backend.exception.ServicoNotFoundException;
 import com.deloitte.bootcamp.api_backend.model.dto.ServicoDTO;
 import com.deloitte.bootcamp.api_backend.model.entity.Servico;
-import com.deloitte.bootcamp.api_backend.model.entity.TipoUsuario;
-import com.deloitte.bootcamp.api_backend.model.entity.Usuario;
+import com.deloitte.bootcamp.api_backend.model.entity.RoleName;
+import com.deloitte.bootcamp.api_backend.model.entity.User;
 import com.deloitte.bootcamp.api_backend.repository.ServicoRepository;
-import com.deloitte.bootcamp.api_backend.repository.UsuarioRepository;
+import com.deloitte.bootcamp.api_backend.repository.UserRepository;
 import com.deloitte.bootcamp.api_backend.model.mapper.ServicoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,10 +22,10 @@ public class ServicoService {
     private ServicoRepository servicoRepository;
 
     @Autowired
-    private UsuarioService usuarioService;
+    private UserServices userServices;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UserRepository userRepository;
 
     // ============================= POST METHODS =============================
 
@@ -41,11 +41,11 @@ public class ServicoService {
         validarServicoDTO(dto); // Garante que os dados do serviço estão corretos
 
         // Busca o usuário pelo ID, lança exceção se não existir
-        Usuario usuario = usuarioRepository.findById(usuarioId)
+        User usuario = userRepository.findById(usuarioId)
                 .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
 
         // Verifica se o usuário é do tipo PROFISSIONAL
-        if (usuario.getTipoUsuario() != TipoUsuario.ROLE_PROFISSIONAL) {
+        if (usuario.getRoleName() != RoleName.ROLE_PROFISSIONAL) {
             throw new IllegalArgumentException("Usuário não é um profissional");
         }
 
@@ -72,7 +72,7 @@ public class ServicoService {
     public ResponseEntity<List<ServicoDTO>> listarServicosPorProfissional(Long usuarioId) {
         validarId(usuarioId, "Usuário");
 
-        Usuario usuario = usuarioRepository.findById(usuarioId)
+        User usuario = userRepository.findById(usuarioId)
                 .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
 
         List<ServicoDTO> servicos = servicoRepository.findByProfissional_Id(usuarioId)
@@ -106,7 +106,7 @@ public class ServicoService {
      */
     public ServicoDTO atualizarServico(Long id, Long usuarioId, ServicoDTO dto) {
         validarServicoDTO(dto);
-        Usuario usuario = usuarioService.buscarUsuarioEntidadePorId(usuarioId);
+        User usuario = userServices.buscarUsuarioEntidadePorId(usuarioId);
         Servico servico = buscarServicoEntidadePorId(id);
 
         if (!servico.getProfissional().getId().equals(usuarioId)) {
@@ -130,7 +130,7 @@ public class ServicoService {
      */
     public void deletarServico(Long id, Long usuarioId) {
 
-        Usuario usuario = usuarioService.buscarUsuarioEntidadePorId(usuarioId);
+        User usuario = userServices.buscarUsuarioEntidadePorId(usuarioId);
 
         Servico servico = buscarServicoEntidadePorId(id);
 

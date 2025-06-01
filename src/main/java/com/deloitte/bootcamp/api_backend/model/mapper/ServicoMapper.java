@@ -2,7 +2,7 @@ package com.deloitte.bootcamp.api_backend.model.mapper;
 
 import com.deloitte.bootcamp.api_backend.model.dto.ServicoDTO;
 import com.deloitte.bootcamp.api_backend.model.entity.Servico;
-import com.deloitte.bootcamp.api_backend.model.entity.Usuario;
+import com.deloitte.bootcamp.api_backend.model.entity.User;
 
 
 /**
@@ -63,7 +63,7 @@ import com.deloitte.bootcamp.api_backend.model.entity.Usuario;
             servico.setPreco(dto.getPreco());
             servico.setDuracao(dto.getDuracao());
             if (dto.getProfissionalId() != null) {
-                Usuario profissional = new Usuario();
+                User profissional = new User();
                 profissional.setId(dto.getProfissionalId());
                 servico.setProfissional(profissional);
             } else {

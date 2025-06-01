@@ -17,12 +17,10 @@ public class ServicoController {
 
     // ============================= GET METHODS =============================
 
-
     @GetMapping("/profissional/{usuarioId}")
     public ResponseEntity<List<ServicoDTO>> listarPorProfissional(@PathVariable Long usuarioId) {
         return servicoService.listarServicosPorProfissional(usuarioId);
     }
-
 
     @GetMapping("/{id}")
     public ResponseEntity<ServicoDTO> buscarPorId(@PathVariable Long id) {
@@ -38,7 +36,6 @@ public class ServicoController {
     }
 
     // ============================= PUT METHODS =============================
-
 
     @PutMapping("/{id}/profissional/{usuarioId}")
     public ResponseEntity<ServicoDTO> atualizar(@PathVariable Long id, @PathVariable Long usuarioId, @RequestBody ServicoDTO dto) {
