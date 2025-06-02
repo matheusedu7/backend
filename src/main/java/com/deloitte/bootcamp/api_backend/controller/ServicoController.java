@@ -29,7 +29,6 @@ public class ServicoController {
 
     // ============================= POST METHODS ============================
 
-
     @PostMapping("/profissional/{usuarioId}")
     public ResponseEntity<ServicoDTO> criar(@PathVariable Long usuarioId, @RequestBody ServicoDTO dto) {
         return servicoService.criarServico(usuarioId, dto);
