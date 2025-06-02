@@ -29,7 +29,7 @@ public class SecurityConfig {
                         .requestMatchers("/reset/request", "/reset/change").permitAll()
                         .requestMatchers("/cliente/**").hasRole("CLIENTE")
                         .requestMatchers("/profissional/**").hasRole("PROFISSIONAL")
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .addFilterAt(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
