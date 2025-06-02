@@ -1,6 +1,5 @@
 package com.deloitte.bootcamp.api_backend.security;
 
-import jakarta.servlet.Filter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,8 +24,8 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/register", "/auth/login").permitAll()
-                        .requestMatchers("/auth/user/me").authenticated()
+                        .requestMatchers("/auth/login", "/user/register").permitAll()
+                        .requestMatchers("/auth/me").authenticated()
                         .requestMatchers("/reset/request", "/reset/change").permitAll()
                         .requestMatchers("/cliente/**").hasRole("CLIENTE")
                         .requestMatchers("/profissional/**").hasRole("PROFISSIONAL")

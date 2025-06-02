@@ -25,7 +25,7 @@ import java.util.List;
 public class JwtFilter extends OncePerRequestFilter {
 
     private static final List<String> PUBLIC_PATHS = Arrays.asList(
-            "/auth/register",
+            "/user/register",
             "/auth/login",
             "/reset/request",
             "/reset/change"
@@ -79,12 +79,10 @@ public class JwtFilter extends OncePerRequestFilter {
             // Extração das roles
             String roles = claims.get("roles", String.class);
 
-            // Objeto de autorizaão com as roles
             List<SimpleGrantedAuthority> authorities = Collections.singletonList(
                     new SimpleGrantedAuthority(roles)
             );
 
-            // Criamos um objeto de autenticação com as roles
             UsernamePasswordAuthenticationToken authenticationToken =
                     new UsernamePasswordAuthenticationToken(username, null, authorities);
 
