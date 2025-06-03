@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
+
 @RestController
 @RequestMapping("/user")
 @AllArgsConstructor
@@ -23,11 +25,11 @@ public class UserController {
     private final RegisterService registerService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody @Valid UserRegisterDTO body) {
+    public ResponseEntity<?> registerUser(@RequestBody @Valid UserRegisterDTO body) {
         System.out.println("[DEBUG] Recebido registro: " + body.getEmail());
         try {
             registerService.registerUser(body.getEmail(), body.getNome(), body.getPassword(), body.getRoleName());
-            return ResponseEntity.ok("Registered user");
+            return ResponseEntity.ok(Collections.singletonMap("message", "Registered user"));
         }
         catch (IllegalArgumentException e) {
             log.warn("Erro ao registrar email de usuário", e.getMessage());

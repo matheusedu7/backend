@@ -149,7 +149,6 @@ public class ServicoService {
                 .orElseThrow(() -> new IllegalArgumentException("Serviço não encontrado"));
     }
 
-
     /**
      * Valida se o ID fornecido é válido (não nulo e maior que zero).
      * @param id ID a ser validado
