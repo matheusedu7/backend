@@ -25,7 +25,7 @@ import java.util.List;
 public class JwtFilter extends OncePerRequestFilter {
 
     private static final List<String> PUBLIC_PATHS = Arrays.asList(
-            "/user/register",
+            "/auth/register",
             "/auth/login",
             "/reset/request",
             "/reset/change"
