@@ -18,9 +18,21 @@ public class GlobalExceptionHandler {
         return ex.getMessage();
     }
 
+    @ExceptionHandler(DisponibilidadeNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleDisponibilidadeNotFound(DisponibilidadeNotFoundException ex) {
+        return ex.getMessage();
+    }
+
     @ExceptionHandler(AcessoNegadoException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public String handleAcessoNegado(AcessoNegadoException ex) {
+        return ex.getMessage();
+    }
+
+    @ExceptionHandler(AcessoNegadoDisponibilidadeException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public String handleAcessoNegadoDisponibilidade(AcessoNegadoDisponibilidadeException ex) {
         return ex.getMessage();
     }
 
