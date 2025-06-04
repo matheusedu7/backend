@@ -14,13 +14,14 @@ public class DisponibilidadeMapper {
         dto.setProfissionalId(
                 disponibilidade.getProfissional() != null ? disponibilidade.getProfissional().getId() : null
         );
-        dto.setDiaSemana(
-                disponibilidade.getDiaSemana() != null ? String.valueOf(disponibilidade.getDiaSemana()) : null
-        );
+        String diaSemana = disponibilidade.getDiaSemana() != null ? String.valueOf(disponibilidade.getDiaSemana()) : null;
+        dto.setDiaSemana(diaSemana);  // Só esse campo!
+        dto.setDiasSemana(null); // Não precisa retornar, só serve no cadastro
         dto.setHoraInicio(disponibilidade.getHoraInicio());
         dto.setHoraFim(disponibilidade.getHoraFim());
         return dto;
     }
+
 
     public static Disponibilidade toEntity(DisponibilidadeDTO dto) {
         if (dto == null) return null;

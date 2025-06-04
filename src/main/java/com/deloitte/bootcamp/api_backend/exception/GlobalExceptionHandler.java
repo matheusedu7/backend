@@ -1,6 +1,7 @@
 package com.deloitte.bootcamp.api_backend.exception;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestControllerAdvice
@@ -40,5 +41,10 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handleIllegalArgument(IllegalArgumentException ex) {
         return ex.getMessage();
+    }
+
+    @ExceptionHandler(DisponibilidadeSobrepostaException.class)
+    public ResponseEntity<String> handleDisponibilidadeSobreposta(DisponibilidadeSobrepostaException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
 }
