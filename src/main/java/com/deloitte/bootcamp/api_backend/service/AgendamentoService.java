@@ -42,45 +42,6 @@ import java.util.stream.Collectors;
                     .collect(Collectors.toList());
         }
 
-        /* 3. List available times for a professional/service/date
-        public List<LocalDateTime> listarHorariosDisponiveis(Long profissionalId, Long servicoId, LocalDateTime data) {
-            // Example: get professional's available slots for the day, remove those already booked
-            List<LocalDateTime> disponiveis = disponibilidadeRepository
-                    .findDisponiveisByProfissionalAndServicoAndData(profissionalId, servicoId, data.toLocalDate());
-            List<Agendamento> agendados = agendamentoRepository
-                    .findByProfissionalIdAndServicoIdAndData(profissionalId, servicoId, data.toLocalDate());
-            List<LocalDateTime> ocupados = agendados.stream()
-                    .map(Agendamento::getDataHoraInicio)
-                    .collect(Collectors.toList());
-            return disponiveis.stream()
-                    .filter(h -> !ocupados.contains(h))
-                    .collect(Collectors.toList());
-        }*/
-
-
-        // ==============================  POST METHOD  ================================
-        // 4. Create appointment with validation
-       /* public AgendamentoDTO criarAgendamento(AgendamentoDTO dto) {
-            User cliente = userRepository.findById(dto.getClienteId()).orElseThrow();
-            User profissional = userRepository.findById(dto.getProfissionalId()).orElseThrow();
-            Servico servico = servicoRepository.findById(dto.getServicoId()).orElseThrow();
-
-            // Check if time is available
-            boolean ocupado = agendamentoRepository.existsByProfissionalIdAndDataHoraInicioAndDataHoraFim(
-                    profissional.getId(), dto.getDataHoraInicio(), dto.getDataHoraFim());
-            boolean disponivel = disponibilidadeRepository.existsByProfissionalIdAndDataHoraInicioAndDataHoraFim(
-                    profissional.getId(), dto.getDataHoraInicio(), dto.getDataHoraFim());
-
-            if (ocupado || !disponivel) {
-                throw new IllegalArgumentException("Horário não disponível.");
-            }
-
-            Agendamento agendamento = AgendamentoMapper.toEntity(dto, cliente, profissional, servico);
-            agendamento.setStatus(AgendamentoStatus.AGENDADO);
-            agendamento = agendamentoRepository.save(agendamento);
-            return AgendamentoMapper.toDto(agendamento);
-        } */
-
 
         // ===============================  DELETE METHOD  ================================
         // 6. Cancel appointment with rules (e.g., minimum notice)
