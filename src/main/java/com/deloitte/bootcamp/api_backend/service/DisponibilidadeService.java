@@ -85,7 +85,7 @@ public class DisponibilidadeService {
         return DisponibilidadeMapper.toDTO(updated);
     }
 
-    // ==========================  DELETE METHOD  ================================
+    // ==========================  DELETE METHOD  ===============================
 
     public void delete(Long id) {
         var loggedUser = userServices.getLoggedUser();
